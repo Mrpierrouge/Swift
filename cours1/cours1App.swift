@@ -12,8 +12,7 @@ struct cours1App: App {
     var body: some Scene {
         WindowGroup {
             NavigationStack{
-//                ProfileView()
-                ListTodoView()
+                ContentViewTest()
             }
         }
     }

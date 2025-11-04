@@ -14,4 +14,5 @@ class UserProfileModel: Identifiable {
     var username: String = "Jean Dupont"
     var age: Int = 18
     var avatarImage: UIImage? = nil
+    var friends: Array<UserProfileModel> = []
 }

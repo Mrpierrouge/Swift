@@ -1,0 +1,73 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "%lld" : {
+
+    },
+    "Âge : %lld" : {
+
+    },
+    "Changer la photo" : {
+
+    },
+    "Completed:" : {
+
+    },
+    "Détails Todo" : {
+
+    },
+    "ID:" : {
+
+    },
+    "Informations" : {
+
+    },
+    "Key" : {
+      "extractionState" : "manual"
+    },
+    "Liste des Todos" : {
+
+    },
+    "mainButtonSubtitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Welcome Back !"
+          }
+        }
+      }
+    },
+    "mainTitle" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Great Title"
+          }
+        }
+      }
+    },
+    "Modifier le profil" : {
+
+    },
+    "new game" : {
+
+    },
+    "Nom d'utilisateur" : {
+
+    },
+    "Non" : {
+
+    },
+    "Oui" : {
+
+    },
+    "Profils utilisateurs" : {
+
+    }
+  },
+  "version" : "1.0"
+}

@@ -5,6 +5,7 @@
 //  Created by LETARD Pierric on 03/11/2025.
 //
 import SwiftUI
+import DesignSystem
 
 @Observable
 class ViewModel {
@@ -20,36 +21,39 @@ class ViewModel {
 
 }
 
+struct ContentViewTest: View {
+    @StateObject var test = WordleViewModel()
+    let sampleGrid: [[LetterTile]] = [
+        [
+            LetterTile(id: 0, letter: "S", result: .correct),
+            LetterTile(id: 1, letter: "W", result: .wrong),
+            LetterTile(id: 2, letter: "I", result: .misplaced),
+            LetterTile(id: 3, letter: "F", result: .wrong),
+            LetterTile(id: 4, letter: "T", result: .correct)
+        ],
+        [
+            LetterTile(id: 5, letter: "A", result: .wrong),
+            LetterTile(id: 6, letter: "P", result: .wrong),
+            LetterTile(id: 7, letter: "P", result: .wrong),
+            LetterTile(id: 8, letter: "L", result: .misplaced),
+            LetterTile(id: 9, letter: "E", result: .correct)
+        ]
+    ]
 
-struct ContentView2: View {
-    @State var viewModel = ViewModel()
-    
     var body: some View {
         VStack{
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello world ")
-            Button(viewModel.viewTitle) {
-                viewModel.counter += 1
-                if viewModel.counter == 18 {
-                    viewModel.viewTitle = viewModel.title2
-                } else {
-                    viewModel.viewTitle = viewModel.title1
-                }
+            GridView(rows: test.currentGame?.grid ?? sampleGrid)
+                .padding()
+            Button("new game") {
+                test.startNewGame()
             }
-        }.padding()
+        }.task {
+            test.words = await test.getWord(count: 10)
+        }
+
     }
 }
-
-
 #Preview {
-    ContentView2()
-    NavigationStack {
-        NavigationLink("Aller aux details") {
-            ContentView2()
-        }
-    }
-
+    ContentViewTest()
 }
 

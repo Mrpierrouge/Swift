@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		FDC1E5252EBA1259002958E7 /* DesignSystem in Frameworks */ = {isa = PBXBuildFile; productRef = FDC1E5242EBA1259002958E7 /* DesignSystem */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		FD346DCA2EB89C5D003A1852 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -52,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FDC1E5252EBA1259002958E7 /* DesignSystem in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +83,7 @@
 				FD346DBE2EB89C5B003A1852 /* cours1 */,
 				FD346DCC2EB89C5D003A1852 /* cours1Tests */,
 				FD346DD62EB89C5D003A1852 /* cours1UITests */,
+				FDC1E5232EBA1259002958E7 /* Frameworks */,
 				FD346DBD2EB89C5B003A1852 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -90,6 +96,13 @@
 				FD346DD32EB89C5D003A1852 /* cours1UITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		FDC1E5232EBA1259002958E7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -112,6 +125,7 @@
 			);
 			name = cours1;
 			packageProductDependencies = (
+				FDC1E5242EBA1259002958E7 /* DesignSystem */,
 			);
 			productName = cours1;
 			productReference = FD346DBC2EB89C5B003A1852 /* cours1.app */;
@@ -195,6 +209,9 @@
 			);
 			mainGroup = FD346DB32EB89C5B003A1852;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				FDC1E5202EBA10A0002958E7 /* XCLocalSwiftPackageReference "DesignSystem" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = FD346DBD2EB89C5B003A1852 /* Products */;
 			projectDirPath = "";
@@ -328,6 +345,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -384,6 +402,7 @@
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -550,6 +569,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		FDC1E5202EBA10A0002958E7 /* XCLocalSwiftPackageReference "DesignSystem" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = DesignSystem;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		FDC1E5242EBA1259002958E7 /* DesignSystem */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DesignSystem;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = FD346DB42EB89C5B003A1852 /* Project object */;
 }
