@@ -59,7 +59,10 @@ struct WordleHomePageView: View {
                 WordleGameView(gameModel: viewModel)
             }
             .task {
-                viewModel.words = await viewModel.getWord(count: 10)
+                if viewModel.words.isEmpty {
+                    print("fetching 10 words")
+                    viewModel.words = await viewModel.getWord(count: 10)
+                }
             }
         }
     }

@@ -147,6 +147,10 @@ class WordleGameViewModel: ObservableObject {
         if game.currentRowIndex + 1 < game.grid.count {
             game.currentRowIndex += 1
         }
+        if guess == game.targetWord.uppercased() {
+            print("Victoire !")
+            words.remove(at: 0)
+        }
         
         currentGame = game
     }
