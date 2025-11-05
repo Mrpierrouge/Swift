@@ -42,7 +42,7 @@ class WordleGameViewModel: ObservableObject {
         }
         
         let emptyRow = (0..<word.count).map { i in
-            LetterTile(id: i, letter: nil, result: .wrong)
+            LetterTile(id: i, letter: nil, result: .empty)
         }
         let grid = Array(repeating: emptyRow, count: 6)
         
@@ -106,6 +106,8 @@ class WordleGameViewModel: ObservableObject {
             targetLetterCount[letter, default: 0] += 1
         }
         
+        // Ici on fait 2 boucles d'afflié pour pas que une lettre mal placée prenne la place d'une lettre bien placée dans le targetLetterCount.
+        // On veux d'abord chercher les lettres bien placés et les enlever de targetLetterCount, ensuite sur celles restantes on vérifie si elle existe ailleurs dans le mot
         
         for i in 0..<target.count {
             let guessChar = Array(guess)[i]
@@ -114,6 +116,7 @@ class WordleGameViewModel: ObservableObject {
                 targetLetterCount[guessChar]! -= 1
             }
         }
+        
         for i in 0..<target.count {
             let guessChar = Array(guess)[i]
             if game.grid[rowIndex][i].result != .correct && targetLetterCount[guessChar] ?? 0 > 0{
@@ -127,5 +130,16 @@ class WordleGameViewModel: ObservableObject {
         }
         
         currentGame = game
+    }
+    func tap(key: KeyboardKey) {
+        switch key.type {
+        case .letter(let l):
+            insertLetter(letter: l)
+        case .enter:
+            tryWord()
+        case .delete:
+            deleteLetter()
+            
+        }
     }
 }

@@ -41,12 +41,12 @@ public struct KeyboardKeyView: View {
         }
     }
     
-    func color(for state: LetterResult?) -> Color {
+    func color(for state: LetterResult) -> Color {
         switch state {
         case .correct: return .green
         case .misplaced: return .yellow
-        case .wrong: return .gray
-        case .none: return .secondary.opacity(0.3)
+        case .wrong: return .red
+        case .empty: return .gray
         }
     }
 }

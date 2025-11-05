@@ -21,18 +21,7 @@ public struct WordleGameView: View {
         Spacer()
         
         KeyboardView { key in
-            switch key.type {
-            case .letter(let l):
-                print("Lettre tapée : \(l)")
-                gameModel.insertLetter(letter: l)
-            case .enter:
-                print("Entrée")
-                gameModel.tryWord()
-            case .delete:
-                print("Effacer")
-                gameModel.deleteLetter()
-
-            }
+            gameModel.tap(key: key)
         }
         .navigationTitle("Wordle")
         .navigationBarTitleDisplayMode(.inline)

@@ -17,19 +17,10 @@ public struct LetterTileView: View {
     public var body: some View {
         Text(letterTile.letter ?? "")
             .frame(width: size, height: size)
-            .background(color(for: letterTile.result))
+            .background(letterTile.color)
             .cornerRadius(8)
             .font(.title)
             .bold()
-    }
-    
-    public func color(for result: LetterResult?) -> Color {
-        switch result {
-        case .correct: return .green
-        case .misplaced: return .yellow
-        case .wrong: return .gray
-        case .none: return .secondary.opacity(0.3)
-        }
     }
     
 }
