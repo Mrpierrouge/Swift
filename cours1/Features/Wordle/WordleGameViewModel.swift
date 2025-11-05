@@ -41,7 +41,6 @@ class WordleGameViewModel: ObservableObject {
             word = first.name.uppercased()
         }
         
-        // Crée une grille vide : par ex. 6 tentatives possibles
         let emptyRow = (0..<word.count).map { i in
             LetterTile(id: i, letter: nil, result: .wrong)
         }
@@ -66,5 +65,67 @@ class WordleGameViewModel: ObservableObject {
             print(error)
             return ""
         }
+    }
+    func insertLetter(letter: String){
+        guard var game = currentGame else { return }
+        guard !game.isOver else { return }
+        
+        let rowIndex = game.currentRowIndex
+        guard let emptyIndex = game.grid[rowIndex].firstIndex(where: { $0.letter == nil }) else {
+            return
+        }
+        
+        game.grid[rowIndex][emptyIndex].letter = letter.uppercased()
+        currentGame = game
+    }
+    func deleteLetter() {
+        guard var game = currentGame else { return }
+        guard !game.isOver else { return }
+        
+        let rowIndex = game.currentRowIndex
+        
+        if let lastFilled = game.grid[rowIndex].lastIndex(where: { $0.letter != nil }) {
+            game.grid[rowIndex][lastFilled].letter = nil
+            currentGame = game
+        }
+    }
+    func tryWord() {
+        guard var game = currentGame else { return }
+        var rowIndex = game.currentRowIndex
+        let attempt = game.currentAttempt
+        
+        guard attempt.isComplete else {
+            print("Mot incomplet")
+            return
+        }
+        let guess = attempt.currentWord
+        let target = Array(game.targetWord.uppercased())
+        var targetLetterCount: [Character: Int] = [:]
+        
+        for letter in target {
+            targetLetterCount[letter, default: 0] += 1
+        }
+        
+        
+        for i in 0..<target.count {
+            let guessChar = Array(guess)[i]
+            if guessChar == target[i] {
+                game.grid[rowIndex][i].result = .correct
+                targetLetterCount[guessChar]! -= 1
+            }
+        }
+        for i in 0..<target.count {
+            let guessChar = Array(guess)[i]
+            if game.grid[rowIndex][i].result != .correct && targetLetterCount[guessChar] ?? 0 > 0{
+                game.grid[rowIndex][i].result = .misplaced
+                targetLetterCount[guessChar]! -= 1
+            }
+        }
+        
+        if game.currentRowIndex + 1 < game.grid.count {
+            game.currentRowIndex += 1
+        }
+        
+        currentGame = game
     }
 }

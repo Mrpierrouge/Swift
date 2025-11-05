@@ -21,6 +21,6 @@ public struct LetterTile: Codable, Identifiable {
     }
     
     public let id: Int
-    public let letter: String?
-    public let result: LetterResult
+    public var letter: String?
+    public var result: LetterResult
 }

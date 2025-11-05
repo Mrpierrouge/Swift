@@ -24,10 +24,14 @@ public struct WordleGameView: View {
             switch key.type {
             case .letter(let l):
                 print("Lettre tapée : \(l)")
+                gameModel.insertLetter(letter: l)
             case .enter:
                 print("Entrée")
+                gameModel.tryWord()
             case .delete:
                 print("Effacer")
+                gameModel.deleteLetter()
+
             }
         }
         .navigationTitle("Wordle")
