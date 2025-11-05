@@ -12,6 +12,7 @@ import DesignSystem
 @Observable
 class WordleGameViewModel: ObservableObject {
     var baseURL: String = "https://trouve-mot.fr/api/random"
+    var message: String = ""
     var words: Array<MotRandom> = []
     var currentGame: Game? = nil
     var dailyWord: String = ""
@@ -52,7 +53,7 @@ class WordleGameViewModel: ObservableObject {
             + "ZXCVBNM".map { KeyboardKey(type: .letter(String($0)), state: .empty) }
             + [KeyboardKey(type: .delete, state: .empty)]
         ]
-        
+        message = ""
         var word = dailyWord
         if !daily {
             guard let first = words.first else { return }
@@ -67,7 +68,7 @@ class WordleGameViewModel: ObservableObject {
         currentGame = Game(targetWord: word.folding(options: .diacriticInsensitive, locale: .current), grid: grid)
         print("Nouveau mot mystère :", word)
     }
-    func getDailyWord() async -> String? {
+    func getDailyWord() async -> String {
         guard let url = URL(string: "https://trouve-mot.fr/api/daily") else {
             return ""
         }
@@ -145,18 +146,26 @@ class WordleGameViewModel: ObservableObject {
         updateKeyboardColors(with: game.grid[rowIndex])
         
         if guess == game.targetWord.uppercased() {
+            message = "Félicitation !"
             print("Victoire !")
             words.remove(at: 0)
-            game.isOver = true
-        }
-        if game.currentRowIndex + 1 < game.grid.count {
-            game.currentRowIndex += 1
+            if dailyWord == "" {
+                game.isOver = true
+            }
         } else {
-            print("Perdu ! le mot était " + game.targetWord)
-            words.remove(at: 0)
-            game.isOver = true
+            if game.currentRowIndex + 1 < game.grid.count {
+                game.currentRowIndex += 1
+            } else {
+                message = "Perdu ! le mot était " + game.targetWord
+                print("Perdu ! le mot était " + game.targetWord)
+                words.remove(at: 0)
+                if dailyWord == "" {
+                    game.isOver = true
+                }
+            }
         }
-
+        
+        
         
         currentGame = game
     }

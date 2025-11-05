@@ -22,6 +22,8 @@ public struct WordleGameView: View {
             .frame(maxHeight: 380)
         
         Spacer(minLength: 10)
+        
+        Text(gameModel.message)
 
         KeyboardView(keys: gameModel.keyboard) { key in
             gameModel.tap(key: key)
