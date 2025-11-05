@@ -15,6 +15,15 @@ class WordleGameViewModel: ObservableObject {
     var words: Array<MotRandom> = []
     var currentGame: Game? = nil
     var dailyWord: String = ""
+    var keyStates: [String: LetterResult] = [:]
+    
+    var keyboard: [[KeyboardKey]] = [
+        "QWERTYUIOP".map { KeyboardKey(type: .letter(String($0)), state: .empty) },
+        "ASDFGHJKL".map { KeyboardKey(type: .letter(String($0)), state: .empty) },
+        [KeyboardKey(type: .enter, state: .empty)]
+        + "ZXCVBNM".map { KeyboardKey(type: .letter(String($0)), state: .empty) }
+        + [KeyboardKey(type: .delete, state: .empty)]
+    ]
     
     func getWord(count: Int = 1) async -> Array<MotRandom> {
         words.removeAll()
@@ -124,6 +133,7 @@ class WordleGameViewModel: ObservableObject {
                 targetLetterCount[guessChar]! -= 1
             }
         }
+        updateKeyboardColors(with: game.grid[rowIndex])
         
         if game.currentRowIndex + 1 < game.grid.count {
             game.currentRowIndex += 1
@@ -140,6 +150,29 @@ class WordleGameViewModel: ObservableObject {
         case .delete:
             deleteLetter()
             
+        }
+    }
+    func updateKeyboardColors(with word: [LetterTile]) {
+        for tile in word {
+            guard let letter = tile.letter else { continue }
+            for rowIndex in keyboard.indices {
+                for keyIndex in keyboard[rowIndex].indices {
+                    
+                    switch keyboard[rowIndex][keyIndex].type {
+                    case .letter(let l) where l == letter:
+                        
+                        let currentState = keyboard[rowIndex][keyIndex].state
+                        if tile.result == .correct || currentState == .empty {
+                            keyboard[rowIndex][keyIndex].state = tile.result
+                            if tile.result == .empty {
+                                keyboard[rowIndex][keyIndex].state = .wrong
+                            }
+                        }
+                    default:
+                        break
+                    }
+                }
+            }
         }
     }
 }

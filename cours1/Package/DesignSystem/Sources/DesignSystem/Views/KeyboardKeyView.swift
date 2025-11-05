@@ -27,7 +27,7 @@ public struct KeyboardKeyView: View {
                 }
             }
             .frame(width: keyWidth, height: size)
-            .background(color(for: key.state))
+            .background(key.color)
             .cornerRadius(6)
             .foregroundColor(.primary)
             .font(.system(size: 18, weight: .bold))
@@ -38,15 +38,6 @@ public struct KeyboardKeyView: View {
         switch key.type {
         case .enter, .delete: return size * 1.5
         default: return size
-        }
-    }
-    
-    func color(for state: LetterResult) -> Color {
-        switch state {
-        case .correct: return .green
-        case .misplaced: return .yellow
-        case .wrong: return .red
-        case .empty: return .gray
         }
     }
 }

@@ -20,7 +20,7 @@ public struct WordleGameView: View {
             .padding()
         Spacer()
         
-        KeyboardView { key in
+        KeyboardView(keys: gameModel.keyboard) { key in
             gameModel.tap(key: key)
         }
         .navigationTitle("Wordle")
