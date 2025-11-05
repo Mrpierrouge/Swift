@@ -144,13 +144,19 @@ class WordleGameViewModel: ObservableObject {
         }
         updateKeyboardColors(with: game.grid[rowIndex])
         
-        if game.currentRowIndex + 1 < game.grid.count {
-            game.currentRowIndex += 1
-        }
         if guess == game.targetWord.uppercased() {
             print("Victoire !")
             words.remove(at: 0)
+            game.isOver = true
         }
+        if game.currentRowIndex + 1 < game.grid.count {
+            game.currentRowIndex += 1
+        } else {
+            print("Perdu ! le mot était " + game.targetWord)
+            words.remove(at: 0)
+            game.isOver = true
+        }
+
         
         currentGame = game
     }

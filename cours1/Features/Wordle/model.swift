@@ -20,9 +20,7 @@ struct Game {
     var currentAttempt: WordAttempt {
         WordAttempt(tiles: grid[currentRowIndex])
     }
-    var isOver: Bool {
-        currentRowIndex >= grid.count
-    }
+    var isOver: Bool = false
 }
 
 struct WordAttempt {

@@ -40,7 +40,9 @@ struct WordleHomePageView: View {
                 Spacer()
                 
                 Button {
-                    viewModel.startNewGame(daily: false)
+                    if viewModel.currentGame == nil || (viewModel.currentGame?.isOver == true) {
+                        viewModel.startNewGame(daily: false)
+                    }
                     navigateToGame = true
                 } label: {
                     Text("Nouvelle partie")
@@ -60,8 +62,9 @@ struct WordleHomePageView: View {
             }
             .task {
                 if viewModel.words.isEmpty {
-                    print("fetching 10 words")
-                    viewModel.words = await viewModel.getWord(count: 10)
+                    //Je fetch les mots 50 par 50 pour réduire le nombre de connexion. J'utilise ensuite les mots dans une liste locale
+                    print("fetching 50 words")
+                    viewModel.words = await viewModel.getWord(count: 50)
                 }
             }
         }
