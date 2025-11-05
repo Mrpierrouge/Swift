@@ -44,6 +44,15 @@ class WordleGameViewModel: ObservableObject {
         }
     }
     func startNewGame(daily: Bool = false) {
+        // Je réassigne le clavier pour reset les couleurs
+        keyboard = [
+            "QWERTYUIOP".map { KeyboardKey(type: .letter(String($0)), state: .empty) },
+            "ASDFGHJKL".map { KeyboardKey(type: .letter(String($0)), state: .empty) },
+            [KeyboardKey(type: .enter, state: .empty)]
+            + "ZXCVBNM".map { KeyboardKey(type: .letter(String($0)), state: .empty) }
+            + [KeyboardKey(type: .delete, state: .empty)]
+        ]
+        
         var word = dailyWord
         if !daily {
             guard let first = words.first else { return }
@@ -55,7 +64,7 @@ class WordleGameViewModel: ObservableObject {
         }
         let grid = Array(repeating: emptyRow, count: 6)
         
-        currentGame = Game(targetWord: word, grid: grid)
+        currentGame = Game(targetWord: word.folding(options: .diacriticInsensitive, locale: .current), grid: grid)
         print("Nouveau mot mystère :", word)
     }
     func getDailyWord() async -> String? {
