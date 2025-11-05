@@ -21,17 +21,17 @@ public struct WordGridView: View {
             let maxColumns = rows.map { $0.count }.max() ?? 5
             let spacing: CGFloat = 8
             let totalSpacing = spacing * CGFloat(maxColumns - 1)
-            let tileSize = (geo.size.width - totalSpacing - 32) / CGFloat(maxColumns) // padding latéral de 16
+            let tileSize = min((availableWidth - totalSpacing) / CGFloat(maxColumns), 60)
             
             Grid(horizontalSpacing: spacing, verticalSpacing: spacing) {
                 ForEach(rows.indices, id: \.self) { rowIndex in
                     WordRowView(tiles: rows[rowIndex], size: tileSize)
                 }
             }
-            .frame(width: availableWidth)
-            .padding(.horizontal, horizontalPadding)
             .frame(maxWidth: .infinity, alignment: .center)
-            
+            .padding(.horizontal, horizontalPadding)
+            .frame(width: geo.size.width, height: geo.size.height, alignment: .top)
         }
+        .frame(maxHeight: 400)
     }
 }

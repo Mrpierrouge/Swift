@@ -15,42 +15,21 @@ public struct KeyboardView: View {
     let action: (KeyboardKey) -> Void
     let keys: [[KeyboardKey]]
 
-//    private let rows: [[KeyboardKey]] = [
-//        "QWERTYUIOP".map { KeyboardKey(type: .letter(String($0))) },
-//        "ASDFGHJKL".map { KeyboardKey(type: .letter(String($0))) },
-//        [KeyboardKey(type: .enter)]
-//        + "ZXCVBNM".map { KeyboardKey(type: .letter(String($0))) }
-//        + [KeyboardKey(type: .delete)]
-//    ]
-//    
-//    public var body: some View {
-//        VStack(spacing: 8) {
-//            ForEach(rows.indices, id: \.self) { rowIndex in
-//                HStack(spacing: 6) {
-//                    ForEach(rows[rowIndex]) { key in
-//                        KeyboardKeyView(key: key, size: 38, action: action)
-//                    }
-//                }
-//                .frame(maxWidth: .infinity, alignment: .center)
-//                
-//            }
-//        }
-//        .padding(.horizontal, 12)
-//        .padding(.bottom, 8)
-//        .frame(maxWidth: .infinity, alignment: .center)
-//        .background(Color(UIColor.systemBackground))
-//    }
     public var body: some View {
         VStack(spacing: 8) {
             ForEach(keys.indices, id: \.self) { rowIndex in
                 HStack(spacing: 6) {
                     ForEach(keys[rowIndex]) { key in
-                        KeyboardKeyView(key: key, size: 38, action: action)
+                        KeyboardKeyView(key: key, size: 32, action: action)
+                            .fixedSize()
                     }
                 }
+                .frame(maxWidth: .infinity)
+
             }
         }
-        .padding(.horizontal, 12)
-        .padding(.bottom, 8)
+        .padding(.horizontal, 8)
+        .padding(.vertical, 12)
+        .frame(maxWidth: .infinity)
     }
 }

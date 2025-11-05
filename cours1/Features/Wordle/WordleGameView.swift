@@ -17,12 +17,16 @@ public struct WordleGameView: View {
     
     public var body: some View {
         WordGridView(rows: gameModel.currentGame?.grid ?? defautlGrid)
-            .padding()
-        Spacer()
+            .padding(.top, 16)
+            .padding(.horizontal)
+            .frame(maxHeight: 380)
         
+        Spacer(minLength: 10)
+
         KeyboardView(keys: gameModel.keyboard) { key in
             gameModel.tap(key: key)
         }
+        .padding(.bottom, 8)
         .navigationTitle("Wordle")
         .navigationBarTitleDisplayMode(.inline)
     }

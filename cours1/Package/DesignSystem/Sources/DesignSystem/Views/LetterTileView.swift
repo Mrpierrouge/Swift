@@ -19,8 +19,7 @@ public struct LetterTileView: View {
             .frame(width: size, height: size)
             .background(letterTile.color)
             .cornerRadius(8)
-            .font(.title)
-            .bold()
+            .font(.system(size: min(size * 0.6, 28), weight: .bold))
     }
     
 }
