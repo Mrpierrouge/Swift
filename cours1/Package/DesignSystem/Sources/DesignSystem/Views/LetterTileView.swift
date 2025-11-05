@@ -7,15 +7,16 @@
 import SwiftUI
 
 public struct LetterTileView: View {
-    public init(letterTile: LetterTile) {
+    public init(letterTile: LetterTile, size: CGFloat = 50) {
         self.letterTile = letterTile
+        self.size = size
     }
-    
+    let size: CGFloat
     let letterTile: LetterTile
-
+    
     public var body: some View {
         Text(letterTile.letter ?? "")
-            .frame(width: 50, height: 50)
+            .frame(width: size, height: size)
             .background(color(for: letterTile.result))
             .cornerRadius(8)
             .font(.title)
@@ -30,38 +31,10 @@ public struct LetterTileView: View {
         case .none: return .secondary.opacity(0.3)
         }
     }
-
+    
 }
 
-public struct WordRowView: View {
-    public init(tiles: [LetterTile]) {
-        self.tiles = tiles
-    }
 
-    let tiles: [LetterTile]
 
-    public var body: some View {
-        HStack(spacing: 8) {
-            ForEach(tiles) { tile in
-                LetterTileView(letterTile: tile)
-            }
-        }
-    }
-}
 
-public struct GridView: View {
-    public init(rows: [[LetterTile]]) {
-        self.rows = rows
-    }
-
-    let rows: [[LetterTile]]
-
-    public var body: some View {
-        VStack(spacing: 8) {
-            ForEach(0..<rows.count, id: \.self) { rowIndex in
-                WordRowView(tiles: rows[rowIndex])
-            }
-        }
-    }
-}
 

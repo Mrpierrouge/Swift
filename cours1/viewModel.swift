@@ -18,42 +18,51 @@ class ViewModel {
     var viewTitle: String = "Clic moi !"
     var title1: String = "Tu as cliqué X fois sur le bouton"
     var title2: String = "Bon anniversaire !"
-
+    
 }
 
-struct ContentViewTest: View {
-    @StateObject var test = WordleViewModel()
-    let sampleGrid: [[LetterTile]] = [
-        [
-            LetterTile(id: 0, letter: "S", result: .correct),
-            LetterTile(id: 1, letter: "W", result: .wrong),
-            LetterTile(id: 2, letter: "I", result: .misplaced),
-            LetterTile(id: 3, letter: "F", result: .wrong),
-            LetterTile(id: 4, letter: "T", result: .correct)
-        ],
-        [
-            LetterTile(id: 5, letter: "A", result: .wrong),
-            LetterTile(id: 6, letter: "P", result: .wrong),
-            LetterTile(id: 7, letter: "P", result: .wrong),
-            LetterTile(id: 8, letter: "L", result: .misplaced),
-            LetterTile(id: 9, letter: "E", result: .correct)
-        ]
-    ]
-
+struct WordleHomePageView: View {
+    @StateObject var viewModel = WordleGameViewModel()
+    @State private var navigateToGame = false
+    
     var body: some View {
-        VStack{
-            GridView(rows: test.currentGame?.grid ?? sampleGrid)
-                .padding()
-            Button("new game") {
-                test.startNewGame()
+        NavigationStack {
+            VStack(spacing: 40) {
+                Text("Wordle")
+                    .font(.largeTitle.bold())
+                    .padding(.top, 40)
+                
+                WordGridView(rows: defautlGrid)
+                    .padding(.horizontal)
+                    .frame(maxHeight: 300)
+                    .opacity(0.7)
+                
+                Spacer()
+                
+                Button {
+                    viewModel.startNewGame(daily: false)
+                    navigateToGame = true
+                } label: {
+                    Text("Nouvelle partie")
+                        .font(.headline)
+                        .foregroundStyle(.white)
+                        .padding()
+                        .frame(maxWidth: .infinity)
+                        .background(Color.accentColor)
+                        .cornerRadius(12)
+                        .padding(.horizontal, 24)
+                }
+                
+                Spacer()
             }
-        }.task {
-            test.words = await test.getWord(count: 10)
+            .navigationDestination(isPresented: $navigateToGame) {
+                WordleGameView(gameModel: viewModel)
+            }
+            .task {
+                viewModel.words = await viewModel.getWord(count: 10)
+            }
         }
-
     }
 }
-#Preview {
-    ContentViewTest()
-}
+
 
