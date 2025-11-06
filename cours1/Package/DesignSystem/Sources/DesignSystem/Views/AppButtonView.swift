@@ -18,7 +18,7 @@ public struct AppButtonView : View {
     
     public var body: some View {
         Button(action: action) {
-            Text(title)
+            Text(NSLocalizedString(title, comment: ""))
                 .font(.headline)
                 .foregroundStyle(.white)
                 .padding()
