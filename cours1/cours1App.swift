@@ -13,6 +13,7 @@ struct cours1App: App {
         WindowGroup {
             NavigationStack{
                 WordleHomePageView()
+//                HomePageView()
             }
         }
     }

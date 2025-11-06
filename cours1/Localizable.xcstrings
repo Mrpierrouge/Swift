@@ -83,6 +83,23 @@
     "Profils utilisateurs" : {
 
     },
+    "replayButton" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Replay"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Rejouer"
+          }
+        }
+      }
+    },
     "Wordle" : {
 
     }

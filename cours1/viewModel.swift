@@ -40,34 +40,13 @@ struct WordleHomePageView: View {
                 
                 Spacer()
                 
-                Button {
-                    
+                AppButtonView(title: "dailyGameButton"){
                     dailyGame.startNewGame(daily: true)
                     navigationDestination = .daily
-                } label: {
-                    Text("dailyGameButton")
-                        .font(.headline)
-                        .foregroundStyle(.white)
-                        .padding()
-                        .frame(maxWidth: .infinity)
-                        .background(Color.accentColor)
-                        .cornerRadius(12)
-                        .padding(.horizontal, 24)
                 }
-                
-                Button {
+                AppButtonView(title:"playButton") {
                     wordleGame.startNewGame(daily: false)
-                    
                     navigationDestination = .normal
-                } label: {
-                    Text("playButton")
-                        .font(.headline)
-                        .foregroundStyle(.white)
-                        .padding()
-                        .frame(maxWidth: .infinity)
-                        .background(Color.accentColor)
-                        .cornerRadius(12)
-                        .padding(.horizontal, 24)
                 }
                 
             }
@@ -84,7 +63,6 @@ struct WordleHomePageView: View {
             .task {
                 if wordleGame.words.isEmpty {
                     //Je fetch les mots 50 par 50 pour réduire le nombre de connexion. J'utilise ensuite les mots dans une liste locale
-                    print("fetching 50 words")
                     wordleGame.words = await wordleGame.getWord(count: 50)
                 }
                 if dailyGame.dailyWord == "" {

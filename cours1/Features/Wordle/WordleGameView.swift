@@ -24,6 +24,11 @@ public struct WordleGameView: View {
         Spacer(minLength: 10)
         
         Text(gameModel.message)
+        if gameModel.currentGame?.isOver == true {
+            AppButtonView(title: "replayButton") {
+                gameModel.startNewGame()
+            }
+        }
 
         KeyboardView(keys: gameModel.keyboard) { key in
             gameModel.tap(key: key)
