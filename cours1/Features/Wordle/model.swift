@@ -35,3 +35,10 @@ struct WordAttempt {
         tiles.firstIndex(where: { $0.letter == nil })
     }
 }
+
+enum GameDestination: Hashable, Identifiable {
+    case daily
+    case normal
+    
+    var id: Self { self }
+}

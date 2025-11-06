@@ -45,6 +45,9 @@ class WordleGameViewModel: ObservableObject {
         }
     }
     func startNewGame(daily: Bool = false) {
+        guard currentGame == nil || (currentGame?.isOver == true) else {
+            return
+        }
         // Je réassigne le clavier pour reset les couleurs
         keyboard = [
             "QWERTYUIOP".map { KeyboardKey(type: .letter(String($0)), state: .empty) },

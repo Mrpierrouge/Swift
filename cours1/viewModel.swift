@@ -24,9 +24,8 @@ class ViewModel {
 struct WordleHomePageView: View {
     @StateObject var wordleGame = WordleGameViewModel()
     @StateObject var dailyGame = WordleGameViewModel()
-    @State private var navigateToGame = false
-    @State private var navigateToDaily = false
-
+    
+    @State private var navigationDestination: GameDestination? = nil
     var body: some View {
         NavigationStack {
             VStack(spacing: 40) {
@@ -42,12 +41,11 @@ struct WordleHomePageView: View {
                 Spacer()
                 
                 Button {
-                    if dailyGame.currentGame == nil || (dailyGame.currentGame?.isOver == true) {
-                        dailyGame.startNewGame(daily: true)
-                    }
-                    navigateToDaily = true
+                    
+                    dailyGame.startNewGame(daily: true)
+                    navigationDestination = .daily
                 } label: {
-                    Text("Daily Game")
+                    Text("dailyGameButton")
                         .font(.headline)
                         .foregroundStyle(.white)
                         .padding()
@@ -58,12 +56,11 @@ struct WordleHomePageView: View {
                 }
                 
                 Button {
-                    if wordleGame.currentGame == nil || (wordleGame.currentGame?.isOver == true) {
-                        wordleGame.startNewGame(daily: false)
-                    }
-                    navigateToGame = true
+                    wordleGame.startNewGame(daily: false)
+                    
+                    navigationDestination = .normal
                 } label: {
-                    Text("Jouer")
+                    Text("playButton")
                         .font(.headline)
                         .foregroundStyle(.white)
                         .padding()
@@ -74,12 +71,16 @@ struct WordleHomePageView: View {
                 }
                 
             }
-            .navigationDestination(isPresented: $navigateToGame) {
-                WordleGameView(gameModel: wordleGame)
+            
+            .navigationDestination(item: $navigationDestination) { destination in
+                switch destination {
+                case .daily:
+                    WordleGameView(gameModel: dailyGame)
+                case .normal:
+                    WordleGameView(gameModel: wordleGame)
+                }
             }
-            .navigationDestination(isPresented: $navigateToDaily) {
-                WordleGameView(gameModel: dailyGame)
-            }
+            
             .task {
                 if wordleGame.words.isEmpty {
                     //Je fetch les mots 50 par 50 pour réduire le nombre de connexion. J'utilise ensuite les mots dans une liste locale

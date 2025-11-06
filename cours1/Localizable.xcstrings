@@ -13,8 +13,22 @@
     "Completed:" : {
 
     },
-    "Daily Game" : {
-
+    "dailyGameButton" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Daily Game"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mot du jour"
+          }
+        }
+      }
     },
     "Détails Todo" : {
 
@@ -25,9 +39,6 @@
     "Informations" : {
 
     },
-    "Jouer" : {
-
-    },
     "Key" : {
       "extractionState" : "manual"
     },
@@ -35,26 +46,10 @@
 
     },
     "mainButtonSubtitle" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Welcome Back !"
-          }
-        }
-      }
+
     },
     "mainTitle" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Great Title"
-          }
-        }
-      }
+
     },
     "Modifier le profil" : {
 
@@ -67,6 +62,23 @@
     },
     "Oui" : {
 
+    },
+    "playButton" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Play "
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Jouer "
+          }
+        }
+      }
     },
     "Profils utilisateurs" : {
 
