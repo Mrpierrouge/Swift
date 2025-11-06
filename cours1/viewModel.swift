@@ -45,7 +45,7 @@ struct WordleHomePageView: View {
                     if dailyGame.currentGame == nil || (dailyGame.currentGame?.isOver == true) {
                         dailyGame.startNewGame(daily: true)
                     }
-                    navigateToGame = true
+                    navigateToDaily = true
                 } label: {
                     Text("Daily Game")
                         .font(.headline)

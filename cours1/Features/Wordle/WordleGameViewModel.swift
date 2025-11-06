@@ -54,7 +54,7 @@ class WordleGameViewModel: ObservableObject {
             + [KeyboardKey(type: .delete, state: .empty)]
         ]
         message = ""
-        var word = dailyWord
+        var word = dailyWord.uppercased()
         if !daily {
             guard let first = words.first else { return }
             word = first.name.uppercased()
@@ -147,9 +147,8 @@ class WordleGameViewModel: ObservableObject {
         
         if guess == game.targetWord.uppercased() {
             message = "Félicitation !"
-            print("Victoire !")
-            words.remove(at: 0)
             if dailyWord == "" {
+                words.remove(at: 0)
                 game.isOver = true
             }
         } else {
@@ -157,9 +156,8 @@ class WordleGameViewModel: ObservableObject {
                 game.currentRowIndex += 1
             } else {
                 message = "Perdu ! le mot était " + game.targetWord
-                print("Perdu ! le mot était " + game.targetWord)
-                words.remove(at: 0)
                 if dailyWord == "" {
+                    words.remove(at: 0)
                     game.isOver = true
                 }
             }
